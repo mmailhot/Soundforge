@@ -8,7 +8,6 @@ class HttpFile extends AudioFile {
 
   Future load(){
     Completer completer = new Completer();
-    audioContext = new AudioContext();
     HttpRequest xhr = new HttpRequest();
     xhr.open("GET",_url);
     xhr.responseType = "arraybuffer";
@@ -22,9 +21,16 @@ class HttpFile extends AudioFile {
     return completer.future;
   }
 
+  AudioBufferSourceNode getSourceNode() {
+    AudioBufferSourceNode node = audioContext.createBufferSource();
+    node.buffer = _buffer;
+    return node;
+  }
+
   AudioBuffer get buffer => _buffer;
 
-  HttpFile(String url) {
+  HttpFile(String url, AudioContext context) {
+    audioContext = context;
     _url = url;
   }
 }
