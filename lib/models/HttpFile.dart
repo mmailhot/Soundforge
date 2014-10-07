@@ -29,8 +29,8 @@ class HttpFile extends AudioFile {
 
   AudioBuffer get buffer => _buffer;
 
-  HttpFile(String url, AudioContext context) {
-    audioContext = context;
+  HttpFile(String url) {
+    audioContext = AudioContextWrapper.context;
     _url = url;
   }
 }
