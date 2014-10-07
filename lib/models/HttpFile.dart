@@ -29,8 +29,11 @@ class HttpFile extends AudioFile {
 
   AudioBuffer get buffer => _buffer;
 
+  String get name => _name;
+
   HttpFile(String url) {
     audioContext = AudioContextWrapper.context;
     _url = url;
+    _name = url.split('/').last;
   }
 }

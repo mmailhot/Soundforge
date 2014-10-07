@@ -1,0 +1,17 @@
+<link rel="import" href="sf_file.html">
+
+<polymer-element name="sf-filelist">
+  <template>
+    <style>
+      #container{
+        background-color: #445878;
+      }
+    </style>
+    <div id="container">
+        <template repeat="{{file in files}}">
+          <sf-file file="{{file}}"></sf-file>
+        </template>
+    </div>
+  </template>
+  <script type="application/dart" src="sf_filelist.dart"></script>
+</polymer-element>

@@ -1,0 +1,27 @@
+<link rel="import" href="elem/sf_iconbutton.html">
+
+<polymer-element name="sf-file">
+  <template>
+    <style>
+      #container{
+        padding:5px;
+        color:#1C1D21;
+        font-size: 0.9rem;
+      }
+
+      :host #container{
+        background-color: #ABB7D4;
+      }
+      :host(:nth-child(2n)) #container{
+        background-color:#B5C2E0;
+      }
+
+    </style>
+    <div id="container">
+      {{file.name}} - {{file.buffer.duration}}
+      <sf-iconbutton size="0.8rem" icon="fa-play"></sf-iconbutton>
+    </div>
+
+  </template>
+  <script type="application/dart" src="sf_file.dart"></script>
+</polymer-element>

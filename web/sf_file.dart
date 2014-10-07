@@ -3,9 +3,11 @@ import 'dart:html' show Event, Node;
 import 'dart:web_audio';
 import '../lib/models/soundforge_models.dart';
 
-@CustomTag('soundforge-app')
-class SoundforgeApp extends PolymerElement {
-  SoundforgeApp.created() : super.created() {
 
-  }
+
+@CustomTag('sf-file')
+class SfFile extends PolymerElement {
+  @published AudioFile file;
+
+  SfFile.created() : super.created() { }
 }
