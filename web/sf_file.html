@@ -1,26 +1,54 @@
 <link rel="import" href="elem/sf_iconbutton.html">
+<link href="packages/core_elements/core_icons.html" rel="import">
+<link href="packages/core_elements/av_icons.html" rel="import">
+
+<link rel="import" href="packages/paper_elements/paper_icon_button.html">
+<link rel="import" href="packages/paper_elements/paper_item.html">
+<link rel="import" href="packages/paper_elements/paper_progress.html">
 
 <polymer-element name="sf-file">
   <template>
     <style>
       #container{
-        padding:5px;
         color:#1C1D21;
         font-size: 0.9rem;
       }
 
+      #inner{
+        height:32px;
+        padding:8px;
+      }
+
       :host #container{
-        background-color: #ABB7D4;
+        background-color:#eeeeee;
       }
       :host(:nth-child(2n)) #container{
-        background-color:#B5C2E0;
+        background-color:#f2f2f2;
+      }
+
+      paper-progress{
+        padding:0;
+        margin:0;
+        width:100%;
+      }
+
+      paper-progress::shadow #activeProgress {
+        background-color: #4285f4;
       }
 
     </style>
-    <div id="container">
-      {{file.name}} - {{file.buffer.duration}}
-      <sf-iconbutton size="0.8rem" icon="fa-play"></sf-iconbutton>
+    <div id="container" vertical layout>
+      <div id="inner" horizontal center layout>
+        <div flex>
+          {{file.name}} - {{file.buffer.duration}}
+        </div>
+        <paper-icon-button icon="{{icon}}" on-click="{{togglePlay}}"></paper-icon-button>
+      </div>
+      <template if="{{isPlaying}}">
+        <paper-progress value="{{playbackProgress}}"></paper-progress>
+      </template>
     </div>
+    </paper-item>
 
   </template>
   <script type="application/dart" src="sf_file.dart"></script>

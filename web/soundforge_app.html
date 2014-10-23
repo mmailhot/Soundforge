@@ -1,10 +1,21 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="sf_filelist.html">
+<link rel="import" href="drive/sf_drive_chooser.html">
 
 <polymer-element name="soundforge-app">
   <template>
-    <div>Test</div>
-    <sf-filelist></sf-filelist>
+    <style>
+      sf-filelist{
+        width:400px;
+      }
+    </style>
+    <div layout horizontal>
+      <sf-filelist></sf-filelist>
+      <div flex>Test</div>
+      <sf-drive-chooser></sf-drive-chooser>
+    </div>
+
+
   </template>
   <script type="application/dart" src="soundforge_app.dart"></script>
 </polymer-element>

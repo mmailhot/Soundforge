@@ -1,0 +1,58 @@
+<link rel="import" href="../packages/core_elements/core_toolbar.html">
+<link rel="import" href="../packages/core_elements/core_icon.html">
+<link rel="import" href="../packages/core_elements/core_iconset.html">
+<link rel="import" href="../packages/paper_elements/paper_dialog.html">
+<link rel="import" href="../packages/paper_elements/paper_button.html">
+<link rel="import" href="../packages/paper_elements/paper_dialog_transition.html">
+
+<polymer-element name="sf-drive-chooser">
+  <template>
+    <style>
+    </style>
+
+    <paper-dialog transition="paper-dialog-transition-center" layered="true" backdrop="true" closeSelector="[closebutton]">
+      <style>
+        .blue-button{
+          color: #4285f4;
+        }
+        #toolbar{
+          background: #4285f4;
+          color:#fff;
+          font-family:sans-serif;
+        }
+
+        :host /deep/ div#main{
+          padding:0;
+          margin:0;
+         }
+
+        #container{
+          padding:16px;
+        }
+
+        #outer{
+          width:800px;
+        }
+
+      </style>
+      <div id="outer">
+
+        <core-toolbar id="toolbar">
+          <core-icon icon="drive"></core-icon>
+          <div flex>File Picker</div>
+        </core-toolbar>
+        <div id="container">
+          <template if="{{!authenticated}}">
+            <p>You're not currently logged in</p>
+          </template>
+        </div>
+      </div>
+
+      <template if="{{!authenticated}}">
+        <paper-button label="Close" dismissive closebutton></paper-button>
+        <paper-button class="blue-button" label="Authenticate" on-click="{{doLogin}}" affirmative></paper-button>
+        </template>
+    </paper-dialog>
+  </template>
+  <script type="application/dart" src="sf_drive_chooser.dart"></script>
+</polymer-element>

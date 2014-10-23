@@ -9,4 +9,8 @@ class SfIconButton extends PolymerElement {
   @published String size;
 
   SfIconButton.created() : super.created() { }
+
+  void onClicked(Event e, var detail, Node sender) {
+    e.preventDefault();
+  }
 }

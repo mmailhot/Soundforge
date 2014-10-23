@@ -34,6 +34,6 @@ class HttpFile extends AudioFile {
   HttpFile(String url) {
     audioContext = AudioContextWrapper.context;
     _url = url;
-    _name = url.split('/').last;
+    _name = Uri.decodeComponent(url.split('/').last);
   }
 }
