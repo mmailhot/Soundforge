@@ -1,5 +1,6 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="sf_filelist.html">
+<link rel="import" href="sf_multitrack.html">
 <link rel="import" href="drive/sf_drive_chooser.html">
 
 <polymer-element name="soundforge-app">
@@ -8,14 +9,18 @@
       sf-filelist{
         width:400px;
       }
+      sf-multitrack{
+        height:100%;
+      }
+      #container{
+        width: 100%;
+        height:100%;
+      }
     </style>
-    <div layout horizontal>
+    <div layout horizontal id="container">
       <sf-filelist></sf-filelist>
-      <div flex>Test</div>
-      <sf-drive-chooser></sf-drive-chooser>
+      <sf-multitrack flex project="{{project}}"></sf-multitrack>
     </div>
-
-
   </template>
   <script type="application/dart" src="soundforge_app.dart"></script>
 </polymer-element>

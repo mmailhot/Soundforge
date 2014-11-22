@@ -1,5 +1,5 @@
 import 'package:polymer/polymer.dart';
-import 'dart:html' show Event, Node, window;
+import 'dart:html' show MouseEvent, Event, Node, window;
 import 'dart:web_audio';
 import '../lib/models/soundforge_models.dart';
 
@@ -7,7 +7,23 @@ import '../lib/models/soundforge_models.dart';
 
 @CustomTag('sf-file')
 class SfFile extends PolymerElement {
-  @published AudioFile file;
+
+  AudioFile _file;
+
+  @published AudioFile get file => _file;
+  @published void set file(AudioFile file){
+    player = null;
+    if(file.loaded){
+      player = new SimpleAudioPlayer(file);
+    }else{
+      file.load().then((_){
+        player = new SimpleAudioPlayer(file);
+      });
+    }
+
+    _file = file;
+  }
+
   @observable SimpleAudioPlayer player;
 
   @observable bool isPlaying = false;
@@ -20,19 +36,7 @@ class SfFile extends PolymerElement {
   void togglePlay(Event e, var detail, Node sender){
     e.preventDefault();
     if(player == null){
-      //TODO: Something better that this
-      file.load().then((_){
-        if(player != null){
-          //Triggers if the player clicked play again while loading
-          return;
-        }
-        player = new SimpleAudioPlayer(file);
-        player.play();
-        player.onEnd = (){
-          _updatePlayStatus();
-        };
-        _updatePlayStatus();
-      });
+      return;
     }else{
       if(!player.playing){
         player.play();
@@ -58,12 +62,18 @@ class SfFile extends PolymerElement {
 
   }
 
+  void startDrag(MouseEvent e){
+    e.dataTransfer.setData("sf/addclip","true");
+    e.dataTransfer.effectAllowed = "copy";
+    e.dataTransfer.dropEffect = "copy";
+    FileHolder.add(file);
+  }
+
   void _update(num time){
     _animFrame = window.requestAnimationFrame(_update);
     playbackProgress = player.getPlaybackPosition();
   }
 
   SfFile.created() : super.created() {
-
   }
 }

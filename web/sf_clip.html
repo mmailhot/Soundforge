@@ -1,0 +1,31 @@
+<link rel="import" href="sf_file.html">
+<link rel="import" href="packages/core_elements/core_toolbar.html">
+<link rel="import" href="packages/core_elements/core_drag_drop.html">
+<link rel="import" href="packages/paper_elements/paper_icon_button.html">
+<link rel="import" href="drive/sf_drive_chooser.html">
+
+<polymer-element name="sf-clip">
+  <template>
+    <style>
+      #clip{
+        box-sizing: border-box;
+        background-color:#00aa00;
+        height:100%;
+        border-radius:5px;
+        border:1px solid #009900;
+        width:{{width}}px;
+        padding:10px;
+      }
+      p{
+        padding:0;
+        margin:0;
+      }
+    </style>
+    <core-drap-drop></core-drap-drop>
+    <div id="clip" draggable="true" on-dragstart="{{onStartDrag}}">
+      <p>{{clip.file.name}}</p>
+      <p>{{clip.start}}</p>
+    </div>
+  </template>
+  <script type="application/dart" src="sf_clip.dart"></script>
+</polymer-element>

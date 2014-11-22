@@ -1,0 +1,48 @@
+<link rel="import" href="sf_file.html">
+<link rel="import" href="packages/core_elements/core_toolbar.html">
+<link rel="import" href="packages/paper_elements/paper_icon_button.html">
+<link rel="import" href="sf_track.html">
+<link rel="import" href="elem/sf_trackticks.html">
+
+<polymer-element name="sf-multitrack">
+  <template>
+    <style>
+      #container{
+        background-color: #445878;
+      }
+      #toolbar{
+        background: #4285f4;
+        color:#fff;
+        font-family:sans-serif;
+      }
+      #track_holder{
+        width:100%;
+        overflow-x:scroll;
+      }
+      .pbHead{
+        position:relative;
+        top:0;
+        bottom:0;
+        width:1px;
+        background-color: black;
+      }
+    </style>
+    <div id="container">
+      <core-toolbar class="core-narrow" id="toolbar">
+        <div flex>{{project.name}}</div>
+        <paper-icon-button icon="{{icon}}" on-click="{{togglePlay}}"></paper-icon-button>
+        <paper-icon-button icon="add-circle-outline" on-click="{{zoomIn}}"></paper-icon-button>
+        <paper-icon-button icon="remove-circle-outline" on-click="{{zoomOut}}"></paper-icon-button>
+      </core-toolbar>
+      <div id="track_holder">
+        <div>
+          <sf-trackticks duration="{{project.duration}}" scale="{{project.scale}}" is_playing="{{isPlaying}}" head_pos="{{headPosition}}"></sf-trackticks>
+          <template repeat="{{track in project.tracks}}">
+            <sf-track track="{{track}}" duration="{{project.duration}}" scale="{{project.scale}}"></sf-track>
+          </template>
+        </div>
+      </div>
+    </div>
+  </template>
+  <script type="application/dart" src="sf_multitrack.dart"></script>
+</polymer-element>

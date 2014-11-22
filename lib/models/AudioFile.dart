@@ -6,4 +6,5 @@ abstract class AudioFile {
 
   AudioBuffer get buffer;
   String get name;
+  bool get loaded;
 }

@@ -4,6 +4,7 @@
 <link rel="import" href="../packages/paper_elements/paper_dialog.html">
 <link rel="import" href="../packages/paper_elements/paper_button.html">
 <link rel="import" href="../packages/paper_elements/paper_dialog_transition.html">
+<link rel="import" href="sf_drive_file.html">
 
 <polymer-element name="sf-drive-chooser">
   <template>
@@ -45,13 +46,19 @@
           <template if="{{!authenticated}}">
             <p>You're not currently logged in</p>
           </template>
+          <template if="{{authenticated}}" repeat="{{file in availableFiles}}">
+            <sf-drive-file file="{{file}}" on-fileselected="{{fileSelected}}"></{{}}sf-drive-file>
+          </template>
         </div>
       </div>
 
       <template if="{{!authenticated}}">
         <paper-button label="Close" dismissive closebutton></paper-button>
         <paper-button class="blue-button" label="Authenticate" on-click="{{doLogin}}" affirmative></paper-button>
-        </template>
+       </template>
+      <template if="{{authenticated}}">
+        <paper-button label="Close" dismissive closebutton></paper-button>
+      </template>
     </paper-dialog>
   </template>
   <script type="application/dart" src="sf_drive_chooser.dart"></script>

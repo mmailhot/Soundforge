@@ -5,7 +5,8 @@ import '../lib/models/soundforge_models.dart';
 
 @CustomTag('soundforge-app')
 class SoundforgeApp extends PolymerElement {
+  @observable Project project;
   SoundforgeApp.created() : super.created() {
-    shadowRoot.querySelector('sf-drive-chooser').toggle();
+    project = new Project();
   }
 }

@@ -1,20 +1,23 @@
 part of soundforge_models;
 
-class HttpFile extends AudioFile {
+class DriveFile extends AudioFile {
   String _url;
   String _name;
   bool _loaded;
   AudioBuffer _buffer;
   AudioContext audioContext;
 
-  Future load(){
+  Future load(AuthClient client){
     Completer completer = new Completer();
     HttpRequest xhr = new HttpRequest();
+    String token = client.credentials.accessToken.data;
     xhr.open("GET",_url);
+    xhr.setRequestHeader("Authorization","Bearer " + token);
     xhr.responseType = "arraybuffer";
     xhr.onLoadEnd.listen((_) {
       audioContext.decodeAudioData(xhr.response).then( (buffer){
         _buffer = buffer;
+        _loaded = true;
         completer.complete();
       });
     });
@@ -34,9 +37,9 @@ class HttpFile extends AudioFile {
 
   bool get loaded => _loaded;
 
-  HttpFile(String url) {
+  DriveFile(File f){
     audioContext = AudioContextWrapper.context;
-    _url = url;
-    _name = Uri.decodeComponent(url.split('/').last);
+    _url = f.downloadUrl;
+    _name = f.title;
   }
 }

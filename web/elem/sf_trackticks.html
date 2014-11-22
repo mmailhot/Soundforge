@@ -1,0 +1,43 @@
+<polymer-element name="sf-trackticks">
+  <template>
+    <style>
+      #trackticks{
+        height:20px;
+        background-color: #fff;
+        overflow-x:hidden;
+        overflow-y:hidden;
+        width: {{width}}px;
+        margin:0px;
+        padding:0px;
+        white-space: nowrap;
+        position:relative;
+      }
+      .tickmark{
+        display: inline-block;
+        width:200px;
+        padding:0px;
+        margin:0px;
+        white-space: nowrap;
+        border-left:1px solid black;
+      }
+
+      .playhead{
+        position: absolute;
+        top:0px;
+        bottom:0px;
+        width:2px;
+        background-color: black;
+      }
+
+    </style>
+    <div id="trackticks">
+      <template repeat="{{timecode in tickpoints}}">
+        <span class="tickmark">{{timecode}}</span>
+      </template>
+      <template if="{{is_playing}}">
+        <div class="playhead" style="left:{{head_pos}}px"></div>
+      </template>
+    </div>
+  </template>
+  <script type="application/dart" src="sf_trackticks.dart"></script>
+</polymer-element>

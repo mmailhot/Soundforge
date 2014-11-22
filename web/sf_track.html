@@ -1,0 +1,34 @@
+<link rel="import" href="sf_file.html">
+<link rel="import" href="sf_clip.html">
+
+<link rel="import" href="packages/core_elements/core_toolbar.html">
+<link rel="import" href="packages/paper_elements/paper_icon_button.html">
+<link rel="import" href="drive/sf_drive_chooser.html">
+
+<polymer-element name="sf-track">
+  <template>
+    <style>
+      #track{
+        position: relative;
+        height:100px;
+        width:{{width}}px;
+      }
+      :host #track{
+        background-color:#eeeeee;
+      }
+      :host(:nth-child(2n)) #track{
+        background-color:#f2f2f2;
+      }
+      sf-clip{
+        position: absolute;
+        height:100%;
+      }
+    </style>
+    <div id="track" on-dragover="{{handleDrag}}" on-drop="{{handleDrop}}">
+      <template repeat="{{clip in track.clips}}">
+        <sf-clip scale="{{scale}}" clip="{{clip}}" style="left:{{clip.start * scale}}px;">{{clip.start}}</sf-clip>
+      </template>
+    </div>
+  </template>
+  <script type="application/dart" src="sf_track.dart"></script>
+</polymer-element>

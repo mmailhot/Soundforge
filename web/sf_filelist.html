@@ -1,6 +1,7 @@
 <link rel="import" href="sf_file.html">
 <link rel="import" href="packages/core_elements/core_toolbar.html">
 <link rel="import" href="packages/paper_elements/paper_icon_button.html">
+<link rel="import" href="drive/sf_drive_chooser.html">
 
 <polymer-element name="sf-filelist">
   <template>
@@ -17,15 +18,15 @@
     <div id="container">
       <core-toolbar class="core-narrow" id="toolbar">
         <div flex>Files</div>
-        <paper-icon-button icon="add-circle"></paper-icon-button>
+        <paper-icon-button icon="add-circle" on-click="{{openDriveFileSelector}}"></paper-icon-button>
       </core-toolbar>
       <div id="file-list">
         <template repeat="{{file in files}}">
           <sf-file file="{{file}}"></sf-file>
         </template>
       </div>
-
     </div>
+    <sf-drive-chooser on-fileloaded="{{addFile}}"></sf-drive-chooser>
   </template>
   <script type="application/dart" src="sf_filelist.dart"></script>
 </polymer-element>
